@@ -1,0 +1,26 @@
+{
+  "name": "kelp-route",
+  "version": "1.0.0",
+  "description": "route middleware for kelp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/song940/kelp-route.git"
+  },
+  "author": "lsong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/song940/kelp-route/issues"
+  },
+  "homepage": "https://github.com/song940/kelp-route#readme",
+  "keywords": [
+    "kelp",
+    "route"
+  ],
+  "dependencies": {
+    "path-to-regexp": "^1.2.1"
+  }
+}
