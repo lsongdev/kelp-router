@@ -1,4 +1,5 @@
 'use strict';
+const url = require('url');
 const pathToRegexp = require('path-to-regexp');
 
 function route(method, path, callback){
@@ -10,9 +11,12 @@ function route(method, path, callback){
   var keys = [];
   var regexp = pathToRegexp(path, keys);
   return function(req, res, next){
-    if((method ? (method.toUpperCase() == req.method) : true) &&  regexp.test(req.url)){
-      req.params = {};
-      var matchs = regexp.exec(req.url).slice(1);
+    var u = url.parse(req.url, true);
+    req.params = {};
+    req.query = u.query;
+    req.path = u.pathname;
+    if((method ? (method.toUpperCase() == req.method) : true) &&  regexp.test(req.path)){
+      var matchs = regexp.exec(req.path).slice(1);
       keys.forEach(function(key, i){
         req.params[ key.name ] = matchs[ i ];
       });
