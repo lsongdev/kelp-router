@@ -20,6 +20,13 @@ app.use(route('/', function(req, res){
 }));
 ````
 
+### API
+
++ [(string)method], (string)path, (,,,function)middlewares
++ (string)path, (,,,function)middlewares
++ (string)path, (,,,array)middlewares
++ (string)path, (function)middlewares
+
 ### Contributing
 - Fork this repo
 - Clone your repo
