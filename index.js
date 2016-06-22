@@ -1,6 +1,20 @@
 'use strict';
 const url          = require('url');
 const pathToRegexp = require('path-to-regexp');
+
+;([
+  'get',
+  'head',
+  'post',
+  'put',
+  'delete',
+  'trace',
+  'options',
+  'patch'
+]).forEach(function(method){
+  route[ method ] = route.bind(this, method);
+});
+
 /**
  * [route description]
  * @param  {[type]} method      [description]
@@ -8,7 +22,7 @@ const pathToRegexp = require('path-to-regexp');
  * @param  {[type]} middlewares [description]
  * @return {[type]}             [description]
  */
-module.exports = function route(method, path, middlewares){
+function route(method, path, middlewares){
   var offset = (typeof arguments[1] == 'string') ? 0 : -1;
   method      = arguments[ offset ];
   path        = arguments[ offset + 1 ];
@@ -34,3 +48,9 @@ module.exports = function route(method, path, middlewares){
     }
   }
 };
+
+/**
+ * [exports description]
+ * @type {[type]}
+ */
+module.exports = route;

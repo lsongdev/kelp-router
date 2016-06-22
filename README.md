@@ -7,8 +7,8 @@ route middleware for kelp
 $ npm install kelp-route --save
 ````
 
-
 ### Example
+
 ````javascript
 const kelp  = require('kelp');
 const route = require('kelp-route');
@@ -20,12 +20,18 @@ app.use(route('/', function(req, res){
 }));
 ````
 
-### API
+### APIs
 
-+ [(string)method], (string)path, (,,,function)middlewares
-+ (string)path, (,,,function)middlewares
-+ (string)path, (,,,array)middlewares
-+ (string)path, (function)middlewares
++ [(string)method,] (string)path, (function|array<function>|,,,)middlewares
+
++ route.get
++ route.head
++ route.post
++ route.put
++ route.delete
++ route.trace
++ route.options
++ route.patch
 
 ### Contributing
 - Fork this repo
