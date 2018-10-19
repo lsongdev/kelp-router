@@ -1,6 +1,6 @@
 {
-  "name": "kelp-route",
-  "version": "2.0.0",
+  "name": "kelp-router",
+  "version": "0.0.2",
   "description": "route middleware for kelp",
   "main": "index.js",
   "scripts": {
@@ -21,6 +21,9 @@
     "route"
   ],
   "dependencies": {
-    "path-to-regexp": "*"
+    "routing2": "next"
+  },
+  "devDependencies": {
+    "kelp": "^2.0.1"
   }
 }

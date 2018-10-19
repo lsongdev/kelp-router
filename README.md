@@ -1,23 +1,26 @@
-## kelp-route ![npm](https://badge.fury.io/js/kelp-route.png)
+## kelp-router ![npm](https://badge.fury.io/js/kelp-router.png)
 
-route middleware for kelp
+router middleware for kelp
 
 ### Installation
 ````
-$ npm install kelp-route --save
+$ npm install kelp-router --save
 ````
 
 ### Example
 
 ````javascript
-const kelp  = require('kelp');
-const route = require('kelp-route');
+const kelp    = require('kelp');
+const router  = require('kelp-router');
 
 const app = kelp();
 
-app.use(route('/', function(req, res){
-  res.end('hi');
-}));
+app.use(router);
+
+router.get('/:name?', async (req, res, next) => {
+  const { name } = req.params;
+  res.end(`hello ${name}`);
+});
 ````
 
 ### APIs

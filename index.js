@@ -1,50 +1,33 @@
-'use strict';
-const url          = require('url');
-const pathToRegexp = require('path-to-regexp');
+const { METHODS } = require('http');
+const routing = require('routing2');
 
-;([
-  'get',
-  'head',
-  'post',
-  'put',
-  'delete',
-  'trace',
-  'options',
-  'patch'
-]).forEach(function(method){
-  route[ method ] = route.bind(this, method);
-});
-
-/**
- * [route description]
- * @param  {[type]} method      [description]
- * @param  {[type]} path        [description]
- * @param  {[type]} middlewares [description]
- * @return {[type]}             [description]
- */
-function route(method, path, middleware){
-  var offset = (typeof arguments[1] == 'string') ? 0 : -1;
-  method      = arguments[ offset ];
-  path        = arguments[ offset + 1 ];
-  middleware  = arguments[ offset + 2 ];
-  var keys = [], regexp = pathToRegexp(path, keys);
-  return function(req, res, next){
-    var path = decodeURIComponent(url.parse(req.url).pathname), self = this;
-    if((method ? (method.toUpperCase() == req.method) : true) &&  regexp.test(path)){
-      req.params  = {};
-      var matchs = regexp.exec(path).slice(1);
-      keys.forEach(function(key, index){
-        req.params[ key.name ] = matchs[ index ];
-      });
-      middleware.call(self, req, res, next);
-    }else{
-      next();
+function Router(table){
+  const routes = [];
+  async function run(req, res, next){
+    const { status, route } = routing.find(routes, req);
+    res.statusCode = status;
+    if(!route) return next();
+    req.params = route.params;
+    return route.action(req, res, next);
+  }
+  run.route = (method, path, action) => {
+    routes.push(routing.create({ method, path, action }));
+    return run;
+  };
+  METHODS.forEach(method => {
+    run[method.toLowerCase()] = (path, action) => {
+      return run.route(method, path, action);
+    };
+  });
+  if(typeof route === 'object'){
+    for(var rule in table){
+      var p = rule.split(' ');
+      p = p.length === 1 ? [ 'get' ].concat(p) : p;
+      const [ method, path ] = p;
+      run.route(method, path, table[rule]);
     }
   }
+  return run;
 };
 
-/**
- * [exports description]
- * @type {[type]}
- */
-module.exports = route;
+module.exports = Router;
