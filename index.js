@@ -1,12 +1,12 @@
 const { METHODS } = require('http');
 const routing = require('routing2');
 
-function Router(table){
+function Router(table) {
   const routes = [];
-  async function run(req, res, next){
+  async function run(req, res, next) {
     const { status, route } = routing.find(routes, req);
     res.statusCode = status;
-    if(!route) return next();
+    if (!route) return next();
     req.params = route.params;
     return route.action(req, res, next);
   }
@@ -19,11 +19,11 @@ function Router(table){
       return run.route(method, path, action);
     };
   });
-  if(typeof route === 'object'){
-    for(var rule in table){
+  if (typeof table === 'object') {
+    for (var rule in table) {
       var p = rule.split(' ');
-      p = p.length === 1 ? [ 'get' ].concat(p) : p;
-      const [ method, path ] = p;
+      p = p.length === 1 ? ['get'].concat(p) : p;
+      const [method, path] = p;
       run.route(method, path, table[rule]);
     }
   }
