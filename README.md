@@ -1,6 +1,6 @@
 ## kelp-router ![npm](https://badge.fury.io/js/kelp-router.png)
 
-router middleware for @kelpjs
+> Router middleware for @kelpjs
 
 ### Installation
 ````
@@ -11,7 +11,9 @@ $ npm install kelp-router --save
 
 ````javascript
 const kelp    = require('kelp');
-const router  = require('kelp-router');
+const Router  = require('kelp-router');
+
+const router = new Router();
 
 const app = kelp();
 
@@ -25,16 +27,14 @@ router.get('/:name?', async (req, res, next) => {
 
 ### APIs
 
-+ [(string)method,] (string)path, (function|array<function>|,,,)middlewares
-
-+ route.get
-+ route.head
-+ route.post
-+ route.put
-+ route.delete
-+ route.trace
-+ route.options
-+ route.patch
++ router#get
++ router#head
++ router#post
++ router#put
++ router#delete
++ router#trace
++ router#options
++ router#patch
 
 ### Contributing
 - Fork this repo
