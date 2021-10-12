@@ -1,7 +1,7 @@
 {
   "name": "kelp-router",
-  "version": "0.0.2",
-  "description": "route middleware for kelp",
+  "version": "0.0.3",
+  "description": "Router middleware for @kelpjs",
   "main": "index.js",
   "scripts": {
     "test": "node test/test.js"

@@ -1,6 +1,6 @@
 ## kelp-router ![npm](https://badge.fury.io/js/kelp-router.png)
 
-router middleware for kelp
+router middleware for @kelpjs
 
 ### Installation
 ````

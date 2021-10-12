@@ -20,8 +20,8 @@ function Router(table) {
     };
   });
   if (typeof table === 'object') {
-    for (var rule in table) {
-      var p = rule.split(' ');
+    for (const rule in table) {
+      let p = rule.split(' ');
       p = p.length === 1 ? ['get'].concat(p) : p;
       const [method, path] = p;
       run.route(method, path, table[rule]);
